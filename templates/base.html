@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}ScamShield AI{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-inner">
+    <a href="{{ url_for('index') }}" class="brand">
+      <span class="brand-icon">◈</span> ScamShield <span class="brand-accent">AI</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      {% if session.get('user_id') %}
+        {% if session.get('is_admin') %}
+          <a href="{{ url_for('admin_panel') }}">Admin Panel</a>
+        {% else %}
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a href="{{ url_for('detect') }}">Fraud Detector</a>
+          <a href="{{ url_for('digital_arrest') }}">Digital Arrest</a>
+          <a href="{{ url_for('upi_qr') }}">UPI &amp; QR</a>
+          <a href="{{ url_for('report_scam') }}">Report Scam</a>
+          <a href="{{ url_for('safety_tips') }}">Safety Tips</a>
+        {% endif %}
+        <a href="{{ url_for('logout') }}" class="nav-cta">Logout</a>
+      {% else %}
+        <a href="{{ url_for('index') }}#features">Features</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}" class="nav-cta">Get Started</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-wrap">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <span class="brand-icon">◈</span> ScamShield AI — Built for Economic Times AI Hackathon 2.0 (PS6)
+    </div>
+    <div class="footer-links">
+      <span>Cyber Crime Helpline: <strong>1930</strong></span>
+      <span>·</span>
+      <span><a href="https://cybercrime.gov.in" target="_blank" rel="noopener">cybercrime.gov.in</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

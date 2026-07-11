@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Report a Scam — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>📢 Report a Scam</h1>
+  <p>Help protect the community by reporting scams you've encountered. Reports are reviewed on the Admin Panel.</p>
+</section>
+
+<section class="section">
+  <div class="card auth-card">
+    <form method="POST" action="{{ url_for('report_scam') }}" class="form">
+      <label for="scam_type">Type of Scam</label>
+      <select id="scam_type" name="scam_type" required>
+        <option value="">Select a category</option>
+        <option value="SMS Fraud">SMS Fraud</option>
+        <option value="Email Phishing">Email Phishing</option>
+        <option value="Fake Website/URL">Fake Website / URL</option>
+        <option value="Digital Arrest Scam">Digital Arrest Scam</option>
+        <option value="Fake UPI/QR Code">Fake UPI / QR Code</option>
+        <option value="Fake Job Offer">Fake Job Offer</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="description">Describe what happened</label>
+      <textarea id="description" name="description" rows="5" required placeholder="Explain what the scammer said/did, any links, numbers, or UPI IDs used..."></textarea>
+
+      <label for="contact_info">Scammer's contact info (phone/email/UPI, if known)</label>
+      <input type="text" id="contact_info" name="contact_info" placeholder="Optional">
+
+      <button type="submit" class="btn btn-primary btn-block">Submit Report</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

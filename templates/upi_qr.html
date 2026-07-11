@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Fake UPI & QR Awareness — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>📱 Fake UPI &amp; QR Code Awareness</h1>
+  <p>Understand how QR / UPI scams work and validate a UPI ID before you trust it.</p>
+</section>
+
+<section class="section">
+  <div class="info-grid">
+    <div class="card">
+      <h3>⚠ The #1 myth to unlearn</h3>
+      <p class="highlight-text">Scanning a QR code or entering your UPI PIN can only <strong>send</strong> money out of your account — never receive it.</p>
+      <p class="muted">If someone asks you to scan a QR or enter your UPI PIN to "receive" a payment, refund, or cashback — it is always a scam.</p>
+    </div>
+    <div class="card">
+      <h3>🧾 Common Fake UPI/QR tricks</h3>
+      <ul class="check-list">
+        <li>"Scan this QR to get your cashback / prize money."</li>
+        <li>Fake payment screenshots followed by "please refund the extra amount".</li>
+        <li>QR codes pasted over real ones at shops/parking (physical tampering).</li>
+        <li>Collect-request notifications disguised as "money received" alerts.</li>
+        <li>Urgent calls asking you to share UPI PIN "to reverse a wrong transaction".</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card detect-card">
+    <h3>Verify a UPI ID</h3>
+    <p class="muted">Enter a UPI ID (e.g. <code>name@okaxis</code>) to run a basic format &amp; pattern safety check.</p>
+    <input type="text" id="upiInput" placeholder="example@okaxis">
+    <button id="upiCheckBtn" class="btn btn-primary">Check UPI ID</button>
+
+    <div id="upiLoadingState" class="loading-state hidden">Analyzing...</div>
+
+    <div id="upiResultBox" class="result-box hidden">
+      <div class="result-header">
+        <span id="upiResultBadge" class="badge"></span>
+      </div>
+      <div class="result-section">
+        <h4>Findings</h4>
+        <ul id="upiReasonsList"></ul>
+      </div>
+      <div class="result-section">
+        <h4>Tips</h4>
+        <ul id="upiTipsList"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/upi_qr.js') }}"></script>
+{% endblock %}

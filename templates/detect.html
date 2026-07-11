@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Fraud Detector — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>AI Fraud Detector</h1>
+  <p>Paste an SMS, email body, or website URL. Our AI will classify it as Safe, Suspicious or Fraud.</p>
+</section>
+
+<section class="section detect-section">
+  <div class="card detect-card">
+    <div class="tabs">
+      <button class="tab-btn active" data-type="sms">SMS</button>
+      <button class="tab-btn" data-type="email">Email</button>
+      <button class="tab-btn" data-type="url">Website URL</button>
+    </div>
+
+    <textarea id="inputText" rows="6" placeholder="Paste the SMS / email content here..."></textarea>
+    <button id="analyzeBtn" class="btn btn-primary">Analyze with AI</button>
+
+    <div id="loadingState" class="loading-state hidden">Analyzing with AI model...</div>
+
+    <div id="resultBox" class="result-box hidden">
+      <div class="result-header">
+        <span id="resultBadge" class="badge"></span>
+        <span id="resultConfidence" class="confidence-text"></span>
+      </div>
+      <div class="result-section">
+        <h4>Why this verdict?</h4>
+        <ul id="reasonsList"></ul>
+      </div>
+      <div class="result-section">
+        <h4>What should you do?</h4>
+        <ul id="tipsList"></ul>
+      </div>
+      <div id="digitalArrestAlert" class="alert-banner hidden">
+        🚨 This matches a <strong>Digital Arrest scam</strong> pattern. Do not panic. Hang up and call 1930 (Cyber Crime Helpline).
+      </div>
+    </div>
+  </div>
+
+  <div class="card example-card">
+    <h4>Try a sample</h4>
+    <button class="example-btn" data-text="URGENT: Your account will be blocked in 24 hours. Click here to update your KYC now: http://kyc-verify-sbi.tk/update">Sample Fraud SMS</button>
+    <button class="example-btn" data-text="Your Amazon order #402-1938271 has been shipped and will arrive by Friday.">Sample Safe SMS</button>
+    <button class="example-btn" data-text="We noticed a new sign in to your account, please confirm your identity to keep account safe.">Sample Suspicious Email</button>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/detect.js') }}"></script>
+{% endblock %}

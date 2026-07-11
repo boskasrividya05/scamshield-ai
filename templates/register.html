@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Register — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+  <div class="auth-card">
+    <h2>Create your free account</h2>
+    <p class="auth-sub">Join ScamShield AI to start scanning messages, links and UPI requests.</p>
+    <form method="POST" action="{{ url_for('register') }}" class="form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required placeholder="Your name">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="you@example.com">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required placeholder="At least 6 characters">
+
+      <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+    </form>
+    <p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+  </div>
+</section>
+{% endblock %}

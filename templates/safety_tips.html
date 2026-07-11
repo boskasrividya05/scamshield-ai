@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Safety Tips — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>💡 AI-Generated Safety Tips</h1>
+  <p>Practical, up-to-date guidance generated from patterns seen across thousands of real scam reports.</p>
+</section>
+
+<section class="section">
+  <div class="tips-grid">
+    <div class="card tip-card">
+      <div class="feature-icon">🔐</div>
+      <h3>OTP &amp; PIN Safety</h3>
+      <p>Never share your OTP, UPI PIN, or CVV with anyone — not even someone claiming to be from your bank, RBI, or the police. No legitimate entity ever needs it over a call.</p>
+    </div>
+    <div class="card tip-card">
+      <div class="feature-icon">📞</div>
+      <h3>Unknown Calls &amp; Videos Calls</h3>
+      <p>If a caller creates panic and urgency ("arrest", "blocked", "seized"), pause. Real institutions communicate in writing and give you time to verify.</p>
+    </div>
+    <div class="card tip-card">
+      <div class="feature-icon">🔗</div>
+      <h3>Links &amp; Attachments</h3>
+      <p>Don't click links in unexpected messages. Type the official website address yourself or use the verified app instead.</p>
+    </div>
+    <div class="card tip-card">
+      <div class="feature-icon">💳</div>
+      <h3>Payments &amp; Refunds</h3>
+      <p>You never need to "pay" to receive a refund, prize, or lottery winning. Any request to pay first to unlock money is a scam.</p>
+    </div>
+    <div class="card tip-card">
+      <div class="feature-icon">👪</div>
+      <h3>Involve Someone You Trust</h3>
+      <p>Scammers isolate victims by saying "don't tell anyone." Genuine emergencies never require secrecy from family.</p>
+    </div>
+    <div class="card tip-card">
+      <div class="feature-icon">🧠</div>
+      <h3>Slow Down</h3>
+      <p>Scams rely on urgency to bypass your judgement. Take 5 minutes, verify independently, and the pressure usually reveals the scam.</p>
+    </div>
+  </div>
+
+  <div class="cta-band cta-band-inline">
+    <h2>Not sure about a message you received?</h2>
+    <a href="{{ url_for('detect') }}" class="btn btn-primary">Run it through the AI Detector</a>
+  </div>
+</section>
+{% endblock %}

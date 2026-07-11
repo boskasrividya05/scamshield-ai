@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Welcome, {{ session.get('user_name') }} 👋</h1>
+  <p>Here's a summary of your fraud-check activity.</p>
+</section>
+
+<section class="section">
+  <div class="stat-grid">
+    <div class="stat-card stat-safe">
+      <span class="stat-value">{{ stats.safe }}</span>
+      <span class="stat-label">Safe</span>
+    </div>
+    <div class="stat-card stat-suspicious">
+      <span class="stat-value">{{ stats.suspicious }}</span>
+      <span class="stat-label">Suspicious</span>
+    </div>
+    <div class="stat-card stat-fraud">
+      <span class="stat-value">{{ stats.fraud }}</span>
+      <span class="stat-label">Fraud</span>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="card chart-card">
+      <h3>Scan Result Breakdown</h3>
+      <canvas id="resultChart" height="220"></canvas>
+    </div>
+
+    <div class="card quick-actions-card">
+      <h3>Quick Actions</h3>
+      <a href="{{ url_for('detect') }}" class="quick-action">🔍 Run a new SMS / Email / URL check</a>
+      <a href="{{ url_for('digital_arrest') }}" class="quick-action">🚨 Check for Digital Arrest scam</a>
+      <a href="{{ url_for('upi_qr') }}" class="quick-action">📱 Verify a UPI ID</a>
+      <a href="{{ url_for('report_scam') }}" class="quick-action">📢 Report a scam</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Recent Scan History</h3>
+    {% if history %}
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Type</th><th>Input</th><th>Result</th><th>Confidence</th><th>Date</th></tr>
+        </thead>
+        <tbody>
+          {% for h in history %}
+          <tr>
+            <td><span class="tag">{{ h.input_type|upper }}</span></td>
+            <td class="truncate">{{ h.input_text }}</td>
+            <td><span class="badge badge-{{ h.prediction }}">{{ h.prediction|capitalize }}</span></td>
+            <td>{{ h.confidence }}%</td>
+            <td>{{ h.created_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="empty-state">No scans yet — try the <a href="{{ url_for('detect') }}">Fraud Detector</a> to get started.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+  const ctx = document.getElementById('resultChart');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Safe', 'Suspicious', 'Fraud'],
+      datasets: [{
+        data: [{{ stats.safe }}, {{ stats.suspicious }}, {{ stats.fraud }}],
+        backgroundColor: ['#22C55E', '#FBBF24', '#EF4444'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      plugins: { legend: { position: 'bottom', labels: { color: '#CBD5E1' } } }
+    }
+  });
+</script>
+{% endblock %}

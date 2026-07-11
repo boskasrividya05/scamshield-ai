@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Digital Arrest Scam Detection — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="page-header page-header-alert">
+  <h1>🚨 Digital Arrest Scam Detection</h1>
+  <p>India's fastest-growing scam: fraudsters impersonate police, CBI, customs or narcotics officers on a video
+  call and threaten "digital arrest" to extort money. Learn to recognise it — and test suspicious messages below.</p>
+</section>
+
+<section class="section">
+  <div class="info-grid">
+    <div class="card">
+      <h3>🎭 How the scam works</h3>
+      <ol class="numbered-list">
+        <li>You get a call/message claiming to be from police, CBI, customs, or narcotics department.</li>
+        <li>They claim your Aadhar/PAN/parcel is linked to a crime (drugs, money laundering, etc).</li>
+        <li>You're told to stay on a video call and not tell anyone — a fake "digital arrest".</li>
+        <li>They pressure you to transfer money to a "safe" / "RBI verification" account.</li>
+        <li>Once you pay, they disappear — this is 100% a scam. No real agency works this way.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>✅ Golden rules to remember</h3>
+      <ul class="check-list">
+        <li>No Indian law enforcement agency ever arrests you over a phone/video call.</li>
+        <li>No government agency asks you to transfer money to "verify" your identity.</li>
+        <li>You are always allowed to hang up, verify independently, and involve family.</li>
+        <li>Real police visits come with a written notice/warrant, not a surprise video call.</li>
+        <li>When in doubt: hang up and dial <strong>1930</strong> — the National Cyber Crime Helpline.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card detect-card">
+    <h3>Test a suspicious message</h3>
+    <p class="muted">Paste the exact message or call transcript you received to check if it matches known Digital Arrest scam patterns.</p>
+    <textarea id="daInputText" rows="5" placeholder="e.g. This is CBI officer speaking. Your Aadhar is linked to a money laundering case..."></textarea>
+    <button id="daAnalyzeBtn" class="btn btn-primary">Check for Digital Arrest Pattern</button>
+
+    <div id="daLoadingState" class="loading-state hidden">Analyzing with AI model...</div>
+
+    <div id="daResultBox" class="result-box hidden">
+      <div class="result-header">
+        <span id="daResultBadge" class="badge"></span>
+        <span id="daResultConfidence" class="confidence-text"></span>
+      </div>
+      <div class="result-section">
+        <h4>Why this verdict?</h4>
+        <ul id="daReasonsList"></ul>
+      </div>
+      <div class="result-section">
+        <h4>What should you do right now?</h4>
+        <ul id="daTipsList"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/digital_arrest.js') }}"></script>
+{% endblock %}

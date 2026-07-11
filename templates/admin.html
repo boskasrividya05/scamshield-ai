@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel — ScamShield AI{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>🛡 Admin Panel</h1>
+  <p>Platform overview and community-reported scams.</p>
+</section>
+
+<section class="section">
+  <div class="stat-grid stat-grid-4">
+    <div class="stat-card"><span class="stat-value">{{ stats.total_users }}</span><span class="stat-label">Registered Users</span></div>
+    <div class="stat-card"><span class="stat-value">{{ stats.total_scans }}</span><span class="stat-label">Total AI Scans</span></div>
+    <div class="stat-card stat-fraud"><span class="stat-value">{{ stats.total_fraud }}</span><span class="stat-label">Fraud Detected</span></div>
+    <div class="stat-card"><span class="stat-value">{{ stats.total_reports }}</span><span class="stat-label">Scam Reports</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Community Scam Reports</h3>
+    {% if reports %}
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Type</th><th>Description</th><th>Contact Info</th><th>Reported By</th>
+            <th>Status</th><th>Date</th><th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in reports %}
+          <tr>
+            <td><span class="tag">{{ r.scam_type }}</span></td>
+            <td class="truncate">{{ r.description }}</td>
+            <td>{{ r.contact_info or '—' }}</td>
+            <td>{{ r.reporter_name or 'Unknown' }}</td>
+            <td><span class="badge badge-status-{{ r.status }}">{{ r.status|capitalize }}</span></td>
+            <td>{{ r.created_at }}</td>
+            <td>
+              <form method="POST" action="{{ url_for('update_report_status', report_id=r.id) }}" class="inline-form">
+                <select name="status" onchange="this.form.submit()">
+                  <option value="pending" {% if r.status=='pending' %}selected{% endif %}>Pending</option>
+                  <option value="reviewed" {% if r.status=='reviewed' %}selected{% endif %}>Reviewed</option>
+                  <option value="resolved" {% if r.status=='resolved' %}selected{% endif %}>Resolved</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="empty-state">No scam reports submitted yet.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

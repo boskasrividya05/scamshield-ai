@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}ScamShield AI — Stop Fraud Before It Stops You{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">AI for Digital Public Safety · PS6</span>
+      <h1>Catch the scam <span class="accent-underline">before it catches you.</span></h1>
+      <p class="hero-sub">
+        ScamShield AI reads your SMS, emails, website links, UPI IDs and QR-based
+        requests, and instantly tells you if they're <strong>Safe</strong>,
+        <strong>Suspicious</strong> or <strong>Fraud</strong> — with plain-English
+        reasons and prevention tips. Built to fight India's fastest-growing threat:
+        digital arrest scams.
+      </p>
+      <div class="hero-actions">
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started Free</a>
+        <a href="#features" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>3</strong><span>Risk Levels</span></div>
+        <div><strong>4</strong><span>Detection Modules</span></div>
+        <div><strong>100%</strong><span>Explainable AI</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="scan-card">
+        <div class="scan-card-row">
+          <span class="dot dot-fraud"></span> "You are under digital arrest..."
+        </div>
+        <div class="scan-result result-fraud">FRAUD · 98% confidence</div>
+        <div class="scan-reason">⚠ Matches known Digital Arrest scam pattern</div>
+      </div>
+      <div class="scan-ring ring-1"></div>
+      <div class="scan-ring ring-2"></div>
+      <div class="scan-ring ring-3"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <h2 class="section-title">Everything you need to stay safe online</h2>
+  <p class="section-sub">One platform covering the most common digital fraud vectors in India today.</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">✉</div>
+      <h3>SMS &amp; Email Fraud Detection</h3>
+      <p>Paste any suspicious message and get an instant AI verdict with a clear explanation of every red flag found.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔗</div>
+      <h3>Website URL Scanner</h3>
+      <p>Rule-based phishing detector checks domains, TLDs, shorteners and brand impersonation before you click.</p>
+    </div>
+    <div class="feature-card feature-card-highlight">
+      <div class="feature-icon">🚨</div>
+      <h3>Digital Arrest Scam Shield</h3>
+      <p>Specialised detector for the fake "CBI / police video call" extortion scam — India's most damaging emerging fraud.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>Fake UPI &amp; QR Awareness</h3>
+      <p>Validate UPI IDs and learn why scanning a QR code can never "give" you money — only take it.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📢</div>
+      <h3>Community Scam Reporting</h3>
+      <p>Report scams you encounter so patterns can be tracked and other users protected faster.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Personal Safety Dashboard</h3>
+      <p>Track every scan you've run and see your personal fraud-exposure trend over time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <h2 class="section-title">How the AI decides</h2>
+  <p class="section-sub">A transparent, explainable pipeline — not a black box.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h4>Input</h4>
+      <p>You paste an SMS, email, URL or UPI ID.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h4>TF-IDF + ML Model</h4>
+      <p>A trained Logistic Regression model scores the text for fraud patterns.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h4>Rule-Based Explainer</h4>
+      <p>Keyword &amp; pattern matching (incl. Digital Arrest patterns) builds the "why".</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <h4>Verdict + Tips</h4>
+      <p>You get Safe / Suspicious / Fraud, the reasons, and what to do next.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <h2>Protect yourself and your family today</h2>
+  <p>Free to use. Built by students, for everyone who's ever gotten "that" call.</p>
+  <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Create Free Account</a>
+</section>
+{% endblock %}
