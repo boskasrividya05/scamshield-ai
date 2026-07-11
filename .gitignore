@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+env/
+*.egg-info/
+
+# Flask / DB
+database/scamshield.db
+instance/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Generated diagrams cache (keep the actual PNGs, ignore any temp files)
+docs/diagrams/*.tmp
